@@ -24,15 +24,16 @@ void    qrMenu(void) {
 void	removeIslandScanWait(void) {
     static const u32 offset[] =
     {
-        0x0043DAA8,
-        0x0043F6B4,
-        0x0043F6D8
+		0x0045388C
     };
 	WRITEU32(offset[gameVer], 0xE3A00000);
 }
 
-
 // Sets QR Scan points to 100 allowing you to Island Scan
 void	qrScan100(void) {
-	WRITEU8(0x3313EF33, 0x64);
+	u32 offset = READU32(0x0066F3DC);
+	u32 offset2 = READU32(0x0000001C + offset);
+	u32 offset3 = READU32(0x00000024 + offset2);
+	u32 offset4 = READU32(0x00000004 + offset3);
+	WRITEU8(0x00069A1B + offset4, 0x64);
 }
