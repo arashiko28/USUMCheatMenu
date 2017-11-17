@@ -3,6 +3,8 @@
 
 Plugin created off @AnalogMan151's ntr plugin for S/M. I just changed the codes for them to work on USUM.
 
+[Plugin shoud build good, if there is any error contact me.]
+
 ### Cheats include:
 
 CHEATS WORKING:
