@@ -10,6 +10,7 @@ Plugin created off @AnalogMan151's ntr plugin for S/M. I just changed the codes 
 CHEATS WORKING:
 
 No Outlines.
+
 Max. money.
 
 - Pokémon Spawner (Spawn a wild Pokémon by ID) [NOT WORKING]
