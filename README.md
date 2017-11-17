@@ -13,6 +13,14 @@ No Outlines.
 
 Max. money.
 
+Walk through walls
+
+Walk Speed x1.375
+
+QR Code points 100
+
+No QR wait limitation (can't verify it, should work fine)
+
 - Pokémon Spawner (Spawn a wild Pokémon by ID) [NOT WORKING]
   1. Set ID or Random
   2. Set Level or Wild Level
