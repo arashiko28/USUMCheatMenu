@@ -41,7 +41,7 @@ HOST        = "192.168.1.133"
 PORT        = 5000
 ARCH         = ' -march=armv6k -mlittle-endian -mtune=mpcore -mfloat-abi=hard '
 if (sys.argv[1] == "OLD") or (sys.argv[1] == "old"):
-    NAME         = "SUMO-old3DS"
+    NAME         = "USUMCheatMenu"
     COPYTOPATH    = NAME + ".plg"
     CFLAGS        = ' -Os -c -D OLD ' + ARCH
 elif (sys.argv[1] == "NEW") or (sys.argv[1] == "new"):
