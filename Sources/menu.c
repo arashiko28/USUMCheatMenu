@@ -3,7 +3,7 @@
 // Note: Luma3DS LayeredFS writes code up to 0x005977B8. Do not use addresses
 // prior to this when storing ASM code for cheats
 
-char	*builder_name = "AnalogMan",
+char	*builder_name = "pabogormi",
         version[7] = "v1.0.0",
         updateVer[12] = "Update v?.?",
         formattedVer[35];
@@ -44,31 +44,32 @@ void    disableOnlineCheats(void) {
 
 void    always_run(void) {
     execute_all();
-    generateSpawn();
+/*     generateSpawn();
     setRandomID();
     shinyPokemon();
-    showOpponentInfoOld();
+    showOpponentInfoOld(); */
     disableOnlineCheats();
 }
 
 
+//Comment no added menus (bad fix btw lol)
 void	my_menus(void) {
-    overlayInit();
+    //overlayInit();
     getVersion();
     xsprintf(formattedVer, "%14s %s", version, updateVer);
     new_unselectable_entry("Entries w/ an orange background");
     new_unselectable_entry("have notes. Press (Y) to view.");
     new_super_unselectable_entry(formattedVer, always_run);
 	new_separator();
-    expMenu();
-    new_spoiler("Modifiers");
-       timeMenu();
-       appearanceMenu();
-       battleMenu();
-       movementMenu();
-       pokemonMenu();
-    exit_spoiler();
-    itemMenu();
+   // expMenu();
+   // new_spoiler("Modifiers");
+      // timeMenu();
+      // appearanceMenu();
+      // battleMenu();
+      // movementMenu();
+      // pokemonMenu();
+   // exit_spoiler();
+   // itemMenu();
     currencyMenu();
     miscMenu();
     new_line();
@@ -78,6 +79,6 @@ void	my_menus(void) {
     new_unselectable_entry("page may create Pokemon that");
     new_unselectable_entry("cannot be battled or traded");
     new_separator();
-    pokemonSpawnMenu();
-    illegalMenu();
+   // pokemonSpawnMenu();
+   // illegalMenu();
 }
