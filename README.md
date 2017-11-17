@@ -7,21 +7,8 @@ Plugin created off @AnalogMan151's ntr plugin for S/M. I just changed the codes 
 
 ### Cheats include:
 
-CHEATS WORKING:
-
-No Outlines.
-
-Max. money.
-
-Walk through walls
-
-Walk Speed x1.375
-
-QR Code points 100
-
-No QR wait limitation (can't verify it, should work fine)
-
-Battle Points x9999
+To see current cheats working, read the gbatemp thread:
+https://gbatemp.net/threads/wip-usumcheatmenu-old3ds-compatible-ntr-plugin-for-ultra-sun-moon.489625/
 
 Previously I had removed any codes that could make illegal Pokémon that could not be traded or battled online. I have decided to add these codes in but with a large disclaimer. The Spawner code can make legal Pokémon if attention is taken to location, level, and form of spawned Pokémon.
 
