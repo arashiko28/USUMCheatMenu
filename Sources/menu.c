@@ -61,7 +61,7 @@ void	my_menus(void) {
     new_unselectable_entry("have notes. Press (Y) to view.");
     new_super_unselectable_entry(formattedVer, always_run);
 	new_separator();
-   // expMenu();
+    expMenu();
    // new_spoiler("Modifiers");
       // timeMenu();
       // appearanceMenu();
