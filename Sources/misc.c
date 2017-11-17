@@ -14,7 +14,7 @@
 void    miscMenu(void) {
 
     new_spoiler("Misc");
-        qrMenu();
+        //qrMenu();
         new_spoiler("Group 1");
             //new_entry("Instant Text Speed", instantText);
             //new_entry_arg_note("Access PC Anywhere", "Open Options submenu", pcAnywhere, 0, PCANYWHERE, TOGGLE);
