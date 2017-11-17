@@ -228,8 +228,6 @@ void    catchTrainers(void);
 void    learnAnyTM(u32 state);
 void    relearnAnyMove(u32 state);
 
-// test
-void	pablotest(void);
 
 void    overlayInit(void);
 #endif
