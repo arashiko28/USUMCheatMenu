@@ -16,16 +16,16 @@ void    miscMenu(void) {
     new_spoiler("Misc");
         qrMenu();
         new_spoiler("Group 1");
-            new_entry("Instant Text Speed", instantText);
-            new_entry_arg_note("Access PC Anywhere", "Open Options submenu", pcAnywhere, 0, PCANYWHERE, TOGGLE);
-            new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
+            //new_entry("Instant Text Speed", instantText);
+            //new_entry_arg_note("Access PC Anywhere", "Open Options submenu", pcAnywhere, 0, PCANYWHERE, TOGGLE);
+            //new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
             new_entry_arg_note("Remove Character Outlines", "Open a menu to see change", toggleOutlines, 0, TOGGLEOUTLINES, TOGGLE);
-            new_entry_arg_note("NTR Debug Connection", "Disables NFC in order to allow stable NTR connection", toggleNFC, 0, TOGGLENFC, TOGGLE);
-        exit_spoiler();
-        new_spoiler("Group 2");
-            new_entry_managed_note("Change Camera Zoom", "START+L = Enable\nSTART+R = Disable", cameraZoom, CAMERAZOOM, 0);
-            new_entry_managed_note("View IV/EV on Status Screen", "Press (START) or (X) respectively on Pokemon staus screen and then change Pokemon", viewIVEV, VIEWIVEV, 0);
-        exit_spoiler();
+            //new_entry_arg_note("NTR Debug Connection", "Disables NFC in order to allow stable NTR connection", toggleNFC, 0, TOGGLENFC, TOGGLE);
+        //exit_spoiler();
+        //new_spoiler("Group 2");
+            //new_entry_managed_note("Change Camera Zoom", "START+L = Enable\nSTART+R = Disable", cameraZoom, CAMERAZOOM, 0);
+            //new_entry_managed_note("View IV/EV on Status Screen", "Press (START) or (X) respectively on Pokemon staus screen and then change Pokemon", viewIVEV, VIEWIVEV, 0);
+        //exit_spoiler();
         new_line();
     exit_spoiler();
 }
@@ -209,14 +209,11 @@ void	toggleOutlines(u32 state) {
 
     static const u32 offset[] =
     {
-        0x0041B748,
-        0x0041CFCC,
-        0x0041CFCC
+        0x0042E2B8
     };
 
     WRITEU32(offset[gameVer], (state) ? 0xE320F000 : 0xE5802004);
 }
-
 
 // Disables inGame NFC to allow NTR connection outside of Festival Plaza.
 void    toggleNFC(u32 state) {
