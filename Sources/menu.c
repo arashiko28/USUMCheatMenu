@@ -62,14 +62,14 @@ void	my_menus(void) {
     new_super_unselectable_entry(formattedVer, always_run);
 	new_separator();
     expMenu();
-   // new_spoiler("Modifiers");
+    new_spoiler("Modifiers");
       // timeMenu();
       // appearanceMenu();
       // battleMenu();
-      // movementMenu();
+       movementMenu();
       // pokemonMenu();
    // exit_spoiler();
-   // itemMenu();
+    itemMenu();
     currencyMenu();
     miscMenu();
     new_line();
