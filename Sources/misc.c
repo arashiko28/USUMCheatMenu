@@ -16,7 +16,7 @@ void    miscMenu(void) {
     new_spoiler("Misc");
         qrMenu();
         new_spoiler("Group 1");
-            //new_entry("Instant Text Speed", instantText);
+            new_entry("Instant Text Speed", instantText);
             //new_entry_arg_note("Access PC Anywhere", "Open Options submenu", pcAnywhere, 0, PCANYWHERE, TOGGLE);
             //new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
             new_entry_arg_note("Remove Character Outlines", "Open a menu to see change", toggleOutlines, 0, TOGGLEOUTLINES, TOGGLE);
@@ -123,16 +123,9 @@ void    cameraZoom(void) {
 
 // Sets text speed to instant
 void	instantText(void) {
-
-    static const u32 offset[] =
-    {
-        0x003BE9C8,
-        0x003BFBF4,
-        0x003BFBF4
-    };
-
-    WRITEU32(offset[gameVer] + 0x000, 0xE3A04003);
-	WRITEU32(offset[gameVer] + 0x8A4, 0xE3A05003);
+	
+    WRITEU32(0x003D08FC, 0xE3A05003);
+	WRITEU32(0x003D0058, 0xE3A04003);
 }
 
 
