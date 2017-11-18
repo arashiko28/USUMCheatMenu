@@ -73,12 +73,11 @@ void	my_menus(void) {
     currencyMenu();
     miscMenu();
     new_line();
-    new_line();
-    //new_separator();
-    //new_unselectable_entry("WARNING: The codes on the next");
-    //new_unselectable_entry("page may create Pokemon that");
-    //new_unselectable_entry("cannot be battled or traded");
-    //new_separator();
-   // pokemonSpawnMenu();
-   // illegalMenu();
+    new_separator();
+    new_unselectable_entry("WARNING: The codes on the next");
+    new_unselectable_entry("page may create Pokemon that");
+    new_unselectable_entry("cannot be battled or traded");
+    new_separator();
+    pokemonSpawnMenu();
+    illegalMenu();
 }
