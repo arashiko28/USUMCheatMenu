@@ -65,10 +65,10 @@ void	my_menus(void) {
     new_spoiler("Modifiers");
       // timeMenu();
       // appearanceMenu();
-      // battleMenu();
+       battleMenu();
        movementMenu();
        pokemonMenu();
-   // exit_spoiler();
+    exit_spoiler();
     itemMenu();
     currencyMenu();
     miscMenu();
