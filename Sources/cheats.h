@@ -159,7 +159,7 @@ void    maxBattleStats(u32 state);
 void	catch100(void);
 void    updateShiny(void);
 void    decreaseShinyChance(void);
-void	shinyPokemon(void);
+void	shinyPokemon(u32 state);
 void    zMoves(u32 state);
 void    infZMoves(void);
 void    oneHitKO(void);
