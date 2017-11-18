@@ -67,7 +67,7 @@ void	my_menus(void) {
       // appearanceMenu();
       // battleMenu();
        movementMenu();
-      // pokemonMenu();
+       pokemonMenu();
    // exit_spoiler();
     itemMenu();
     currencyMenu();
