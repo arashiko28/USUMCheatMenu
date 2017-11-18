@@ -78,6 +78,6 @@ void	my_menus(void) {
     new_unselectable_entry("page may create Pokemon that");
     new_unselectable_entry("cannot be battled or traded");
     new_separator();
-    pokemonSpawnMenu();
+    //pokemonSpawnMenu();
     illegalMenu();
 }
