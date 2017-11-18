@@ -18,7 +18,7 @@ void    miscMenu(void) {
         new_spoiler("Group 1");
             new_entry("Instant Text Speed", instantText);
             //new_entry_arg_note("Access PC Anywhere", "Open Options submenu", pcAnywhere, 0, PCANYWHERE, TOGGLE);
-            //new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
+            new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
             new_entry_arg_note("Remove Character Outlines", "Open a menu to see change", toggleOutlines, 0, TOGGLEOUTLINES, TOGGLE);
             //new_entry_arg_note("NTR Debug Connection", "Disables NFC in order to allow stable NTR connection", toggleNFC, 0, TOGGLENFC, TOGGLE);
         //exit_spoiler();
@@ -185,15 +185,8 @@ void    pcAnywhere(u32 state) {
 // Re-battle trainer that have already been fought. Active by holding L and talking to them
 void	rematchTrainers(void) {
 
-    static const u32 offset[] =
-    {
-        0x0049D200,
-        0x0049EFA0,
-        0x0049EFC8
-    };
-
-    WRITEU32(offset[gameVer], (is_pressed(BUTTON_L)) ? 0xE3A00000 :  0xE5911004);
-    WRITEU32(offset[gameVer] + 0x04, (is_pressed(BUTTON_L)) ? 0xE12FFF1E :  0xE5900044);
+    WRITEU32(0x004B9354, (is_pressed(BUTTON_L)) ? 0xE3A00000 :  0xE5911004);
+    WRITEU32(0x004B9354 + 0x04, (is_pressed(BUTTON_L)) ? 0xE12FFF1E :  0xE5900044);
 }
 
 
