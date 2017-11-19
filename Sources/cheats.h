@@ -71,7 +71,8 @@ enum {
     DECREASESHINYCHANCE,
     INFZMOVES,
     ONEHITKO,
-    INVINCIBLEPARTY
+    INVINCIBLEPARTY,
+    INFINITEPP
 } e_identifiers;
 
 // Array of forms
@@ -164,6 +165,7 @@ void    zMoves(u32 state);
 void    infZMoves(void);
 void    oneHitKO(void);
 void    invincibleParty(void);
+void    infinitePP(void);
 
 
 // Movement Modifiers
