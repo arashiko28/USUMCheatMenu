@@ -19,7 +19,7 @@ void    battleMenu(void) {
         //new_entry_arg("Use Z-Moves w/o Z-Crystal", zMoves, 0, ZMOVES, TOGGLE);
         //new_entry_managed("Infinite Z-Moves", infZMoves, INFZMOVES, 0);
         new_entry_managed("Invincible Party", invincibleParty, INVINCIBLEPARTY, 0); // WORKING
-		//new_entry_managed("Infinite PP", infinitePP, INFINITEPP, 0);
+	new_entry_managed("Infinite PP", infinitePP, INFINITEPP, 0);
         new_line();
     exit_spoiler();
     new_spoiler("Opponent");
