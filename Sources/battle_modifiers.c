@@ -19,6 +19,7 @@ void    battleMenu(void) {
         //new_entry_arg("Use Z-Moves w/o Z-Crystal", zMoves, 0, ZMOVES, TOGGLE);
         //new_entry_managed("Infinite Z-Moves", infZMoves, INFZMOVES, 0);
         new_entry_managed("Invincible Party", invincibleParty, INVINCIBLEPARTY, 0); // WORKING
+		//new_entry_managed("Infinite PP", infinitePP, INFINITEPP, 0);
         new_line();
     exit_spoiler();
     new_spoiler("Opponent");
@@ -26,7 +27,7 @@ void    battleMenu(void) {
         new_entry("100% Capture Rate", catch100); //UNKNOWN
         //new_entry_arg_note("View Opponent's Info", "Press START to activate", showOpponentInfo, 0, SHOWOPPONENTINFO, TOGGLE);
         new_entry_managed("1-Hit KO", oneHitKO, ONEHITKO, 0); //WORKING
-        new_entry_arg("Shiny Chance 100%", shinyPokemon, 0, SHINYPOKEMON, TOGGLE); // NOT WORKING
+        new_entry_arg("Shiny Chance 100%", shinyPokemon, 0, SHINYPOKEMON, TOGGLE); // WORKING
         new_line();
     exit_spoiler();
 }
@@ -142,14 +143,16 @@ void    maxBattleStats(u32 state) {
 
 // 100% Catch rate for Pokemon
 void    catch100(void) {
-    static const u32 offset[] =
-    {
-        0x005B9EB0
-    };
-    if (!checkAddress(offset[gameVer]))
-        return;
-    if (READU32(offset[gameVer]) == 0x0A000004)
-        WRITEU32(offset[gameVer], 0xEA000004);
+	WRITEU32(0x005B9EA0, 0xE5D00008);
+	WRITEU32(0x005B9EA4, 0xE92D4003);
+	WRITEU32(0x005B9EA8, 0xE59D0010);
+	WRITEU32(0x005B9EAC, 0xE59F100C);
+	WRITEU32(0x005B9EB0, 0xE1510000);
+	WRITEU32(0x005B9EB4, 0x024000F8);
+	WRITEU32(0x005B9EB8, 0x058D0010);
+	WRITEU32(0x005B9EBC, 0xE8BD8003);
+	WRITEU32(0x005B9EC0, 0x0070A824);
+	WRITEU32(0x004AB184, 0xEB043B45);
 }
 
 
@@ -265,4 +268,26 @@ void    invincibleParty(void) {
             }
         }
     }
+}
+
+void infinitePP(void) {
+
+    static const u32 offset[] =
+    {
+        0x08105FD4
+    };
+
+
+		// WRITEU32(offset[gameVer], 0xE1A04000); // Crashes the game
+		// WRITEU32(offset[gameVer] + 0x04, 0xE92D4007); //crashes the game
+		WRITEU32(offset[gameVer] + 0x08, 0xE59F0018);
+		// WRITEU32(offset[gameVer] + 0x0C, 0xE2801018);
+		// WRITEU32(offset[gameVer] + 0x10, 0xE4902004);
+		// WRITEU32(offset[gameVer] + 0x14, 0xE1560002);
+		// WRITEU32(offset[gameVer] + 0x18, 0x03A04000);
+		// WRITEU32(offset[gameVer] + 0x1C, 0xE1510000);
+		// WRITEU32(offset[gameVer] + 0x20, 0x1AFFFFFA);
+		// WRITEU32(offset[gameVer] + 0x24, 0xE8BD8007);
+		// WRITEU32(offset[gameVer] + 0x28, 0x300073EC);
+		
 }
