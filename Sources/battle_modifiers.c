@@ -245,24 +245,31 @@ void    invincibleParty(void) {
     }
 }
 
+// Infinite PP
 void infinitePP(void) {
 
     static const u32 offset[] =
     {
         0x08105FD4
     };
-
-
-		// WRITEU32(offset[gameVer], 0xE1A04000); // Crashes the game
-		// WRITEU32(offset[gameVer] + 0x04, 0xE92D4007); //crashes the game
+	// Check if address is safe
+	if (!checkAddress(offset[gameVer])) {
+		return;
+	} else {
+		// Check if in battle
+		if (READU32(0x30000158) == 0x40001) {
+		WRITEU32(offset[gameVer], 0xE1A04000);
+		WRITEU32(offset[gameVer] + 0x04, 0xE92D4007);
 		WRITEU32(offset[gameVer] + 0x08, 0xE59F0018);
-		// WRITEU32(offset[gameVer] + 0x0C, 0xE2801018);
-		// WRITEU32(offset[gameVer] + 0x10, 0xE4902004);
-		// WRITEU32(offset[gameVer] + 0x14, 0xE1560002);
-		// WRITEU32(offset[gameVer] + 0x18, 0x03A04000);
-		// WRITEU32(offset[gameVer] + 0x1C, 0xE1510000);
-		// WRITEU32(offset[gameVer] + 0x20, 0x1AFFFFFA);
-		// WRITEU32(offset[gameVer] + 0x24, 0xE8BD8007);
-		// WRITEU32(offset[gameVer] + 0x28, 0x300073EC);
-		
+		WRITEU32(offset[gameVer] + 0x0C, 0xE2801018);
+		WRITEU32(offset[gameVer] + 0x10, 0xE4902004);
+		WRITEU32(offset[gameVer] + 0x14, 0xE1560002);
+		WRITEU32(offset[gameVer] + 0x18, 0x03A04000);
+		WRITEU32(offset[gameVer] + 0x1C, 0xE1510000);
+		WRITEU32(offset[gameVer] + 0x20, 0x1AFFFFFA);
+		WRITEU32(offset[gameVer] + 0x24, 0xE8BD8007);
+		WRITEU32(offset[gameVer] + 0x28, 0x300073EC);
+		WRITEU32(0x0808F868, 0xEB01D9D9);
+		}
+	}
 }
