@@ -11,29 +11,11 @@
 
 void    illegalMenu(void) {
 
-    //new_entry("Catch Trial Pokemon", catchTrial);
     new_entry("Catch Trainer's Pokemon", catchTrainers);
     new_entry_arg("Pokemon can learn any TM", learnAnyTM, 0, LEARNANYTM, TOGGLE);
     new_entry_arg("Learn all from Move Reminder", relearnAnyMove, 0, RELEARNANYMOVE, TOGGLE);
 }
 
-// Catch Pokémon during Trial
-void    catchTrial(void) {
-
-    static const u32 offset[][2] =
-    {
-        {0x080B8440, 0x0807638C},
-        {0x080B88FC, 0x08076530},
-        {0x080B8914, 0x08076530}
-    };
-
-    if (!checkAddress(offset[gameVer][0]))
-        return;
-    if (READU32(offset[gameVer][0]) == 0xE1A01004) {
-        WRITEU32(offset[gameVer][1], 0xE3A00001);
-        WRITEU32(offset[gameVer][0], 0xE3A01000);
-    }
-}
 
 
 // Catch Trainer's Pokémon
