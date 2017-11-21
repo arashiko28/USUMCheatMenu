@@ -17,17 +17,19 @@ void    battleMenu(void) {
     new_spoiler("Party");
         new_entry_arg("Stat Stages +6", maxBattleStats, 0, MAXBATTLESTATS, TOGGLE);
         //new_entry_arg("Use Z-Moves w/o Z-Crystal", zMoves, 0, ZMOVES, TOGGLE);
-        //new_entry_managed("Infinite Z-Moves", infZMoves, INFZMOVES, 0);
+        new_entry_managed("Infinite Z-Moves", infZMoves, INFZMOVES, 0); // working crashes leaving poke refresh
         new_entry_managed("Invincible Party", invincibleParty, INVINCIBLEPARTY, 0); // WORKING
-	new_entry_managed("Infinite PP", infinitePP, INFINITEPP, 0);
+		new_entry_managed("Infinite PP", infinitePP, INFINITEPP, 0);
         new_line();
     exit_spoiler();
     new_spoiler("Opponent");
-        //new_entry_arg_note("No Wild Encounters", "Hold START to temporarily enable encounters", noEncounters, 0, NOENCOUNTERS, TOGGLE);
-        new_entry("100% Capture Rate", catch100); //UNKNOWN
+        new_entry_arg("No Wild Encounters", noEncounters, 0, NOENCOUNTERS, TOGGLE); // works
+        new_entry("100% Capture Rate", catch100); //working
         //new_entry_arg_note("View Opponent's Info", "Press START to activate", showOpponentInfo, 0, SHOWOPPONENTINFO, TOGGLE);
         new_entry_managed("1-Hit KO", oneHitKO, ONEHITKO, 0); //WORKING
-        new_entry_arg("Shiny Chance 100%", shinyPokemon, 0, SHINYPOKEMON, TOGGLE); // WORKING
+        new_entry_arg("Shiny Chance 100%", shinyPokemon, 0, SHINYPOKEMON, TOGGLE);
+		new_entry_managed("Throw pokeball at trials", pokeTrial, POKETRIAL, 0); // working
+		new_entry_managed("Random pokemon encounter", randomPk, RANDOMPK, 0);
         new_line();
     exit_spoiler();
 }
@@ -36,9 +38,7 @@ void    battleMenu(void) {
 void    noEncounters(u32 state) {
     static const u32 offset[] =
     {
-        0x0807A28C,
-        0x0807A5E8,
-        0x0807A5E8
+        0x0807E24C
     };
     if (state) {
         if (!checkAddress(offset[gameVer]))
@@ -46,10 +46,11 @@ void    noEncounters(u32 state) {
         else {
 
             if (READU32(offset[gameVer]) == 0xE3A00064) {
-                if (is_pressed(BUTTON_ST))
+                if (is_pressed(BUTTON_ST)) {
                     WRITEU32(offset[gameVer] - 0x8, 0xE3A09064);
-                else
+			} else {
                     WRITEU32(offset[gameVer] - 0x8, 0xE3A09000);
+			}
             }
         }
     } else {
@@ -86,7 +87,8 @@ void    showOpponentInfo(u32 state) {
 
 // Sets all in-battle stats to +6 ranks
 void    maxBattleStats(u32 state) {
- 	static const u32 offset[] =
+	
+	static const u32 offset[] =
     {
         0x005B9D60
     };
@@ -187,16 +189,23 @@ void    zMoves(u32 state) {
 
 // Inifinite Z-Moves
 void    infZMoves(void) {
-    static const u32 offset = 0x08031100;
+    static const u32 offset = 0x08031E74;
 
-    if (!checkAddress(offset + 0xDC))
+    if (!checkAddress(offset))
         return;
     else {
-        if (READU32(offset + 0xDC) == 0xE320F000) {
-            WRITEU32(offset + 0xD4, 0xE3A00000);
-            WRITEU32(offset + 0xD8, 0xE5C30005);
-            WRITEU32(offset + 0xDC, 0xE1500000);
-        }
+		u32 zmov = READU32(offset);
+		u32 zmov2 = READU32(offset + 0x04);
+		u32 zmov3 = READU32(offset + 0x08);
+        if (READU32(0x30000158) == 0x40001 && READU32(0x30000180) == 3) {
+			WRITEU32(offset, 0xE3A00000);
+            WRITEU32(offset + 0x04, 0xE5C30005);
+            WRITEU32(offset + 0x08, 0xE1500000);
+        } else {
+			// WRITEU32(offset, zmov);
+			// WRITEU32(offset + 0x04, zmov2);
+			// WRITEU32(offset + 0x08, zmov3);
+		}
     }
 }
 
@@ -245,19 +254,17 @@ void    invincibleParty(void) {
     }
 }
 
-// Infinite PP
 void infinitePP(void) {
 
     static const u32 offset[] =
     {
         0x08105FD4
     };
-	// Check if address is safe
+
 	if (!checkAddress(offset[gameVer])) {
 		return;
 	} else {
-		// Check if in battle
-		if (READU32(0x30000158) == 0x40001) {
+		if (READU32(0x30000158) == 0x40001 && READU32(0x30000180) == 3) {
 		WRITEU32(offset[gameVer], 0xE1A04000);
 		WRITEU32(offset[gameVer] + 0x04, 0xE92D4007);
 		WRITEU32(offset[gameVer] + 0x08, 0xE59F0018);
@@ -272,4 +279,34 @@ void infinitePP(void) {
 		WRITEU32(0x0808F868, 0xEB01D9D9);
 		}
 	}
+}
+
+// Throw pokeball at trial
+void pokeTrial(void) {
+	if (!checkAddress(0x08077B8C)) {
+		return;
+	} else {
+		if (READU32(0x30000158) == 0x40001 && READU32(0x30000180) == 3) {
+		WRITEU32(0x08077B8C, 0xE3A00001);
+		WRITEU32(0x080BC3D4, 0xE3A01000);
+		}
+	}
+}
+
+
+// Random pokemon encounter
+void randomPk(void) {
+	
+	WRITEU32(0x005B9FC0, 0xE92D400E);
+	WRITEU32(0x005B9FC4, 0xE3A0001E);
+	WRITEU32(0x005B9FC8, 0xE5C40004);
+	WRITEU32(0x005B9FCC, 0xE59F0008);
+	WRITEU32(0x005B9FD0, 0xEBF907E4);
+	WRITEU32(0x005B9FD4, 0xE2800001);
+	WRITEU32(0x005B9FD8, 0xE8BD800E);
+	WRITEU32(0x005B9FDC, 0x00000327);
+	WRITEU32(0x003A7298, 0xEB084B48);
+	WRITEU32(0x003A72A8, 0xE1D400B0);
+	WRITEU32(0x003A72C4, 0xE1D400B0);
+	
 }
