@@ -4,7 +4,7 @@
 // prior to this when storing ASM code for cheats
 
 char	*builder_name = "pabogormi",
-        version[7] = "v1.7.7",
+        version[7] = "v2.0.1",
         updateVer[12] = "Update v?.?",
         formattedVer[35];
 
@@ -65,19 +65,20 @@ void	my_menus(void) {
     new_spoiler("Modifiers");
       // timeMenu();
       // appearanceMenu();
-       battleMenu();
-       movementMenu();
-       pokemonMenu();
+      battleMenu();
+      movementMenu();
+      pokemonMenu();
     exit_spoiler();
     itemMenu();
     currencyMenu();
     miscMenu();
+    new_line();
     new_line();
     new_separator();
     new_unselectable_entry("WARNING: The codes on the next");
     new_unselectable_entry("page may create Pokemon that");
     new_unselectable_entry("cannot be battled or traded");
     new_separator();
-    //pokemonSpawnMenu();
+   // pokemonSpawnMenu();
     illegalMenu();
 }
