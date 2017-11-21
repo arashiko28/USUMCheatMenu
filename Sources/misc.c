@@ -15,13 +15,12 @@ void    miscMenu(void) {
 
     new_spoiler("Misc");
         qrMenu();
-        new_spoiler("Group 1");
-            new_entry("Instant Text Speed", instantText);
-            //new_entry_arg_note("Access PC Anywhere", "Open Options submenu", pcAnywhere, 0, PCANYWHERE, TOGGLE);
-            new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
-            new_entry_arg_note("Remove Character Outlines", "Open a menu to see change", toggleOutlines, 0, TOGGLEOUTLINES, TOGGLE);
+        new_entry("Instant Text Speed", instantText);
+        new_entry_managed_note("Access PC Anywhere", "Open Options submenu while holding START", pcAnywhere, PCANYWHERE, 0);
+        new_entry_managed_note("Rematch Trainers", "Hold L & talk to Trainer", rematchTrainers, REMATCHTRAINERS, 0);
+        new_entry_arg_note("Remove Character Outlines", "Open a menu to see change", toggleOutlines, 0, TOGGLEOUTLINES, TOGGLE);
+		new_entry_managed("No forced trainer battles", noTrainer, NOTRAINER, 0);
             //new_entry_arg_note("NTR Debug Connection", "Disables NFC in order to allow stable NTR connection", toggleNFC, 0, TOGGLENFC, TOGGLE);
-        //exit_spoiler();
         //new_spoiler("Group 2");
             //new_entry_managed_note("Change Camera Zoom", "START+L = Enable\nSTART+R = Disable", cameraZoom, CAMERAZOOM, 0);
             //new_entry_managed_note("View IV/EV on Status Screen", "Press (START) or (X) respectively on Pokemon staus screen and then change Pokemon", viewIVEV, VIEWIVEV, 0);
@@ -130,55 +129,50 @@ void	instantText(void) {
 
 
 // Access PC from anywhere by opening options menu
-void    pcAnywhere(u32 state) {
-
-    static const u32 offset[][3] =
-    {
-        {0x00595978, 0x00373C48, 0x00373C48},
-        {0x00597878, 0x0037E5E4, 0x00374C3C},
-        {0x00597878, 0x0037E5E4, 0x00374C3C}
-    };
-
-    static const u32 data[][7] =
-    {
-        {0x1AF77D09, 0xEBF7D9CE, 0x00636000, 0x0067206C, 0xEB088755, 0xEB086104, 0xEAF77D09},
-        {0x1AF77958, 0xEBF7D6DC, 0x00638000, 0x006740B4, 0xEB088B18, 0xEB0864A3, 0xEAF77958},
-        {0x1AF77958, 0xEBF7D6DC, 0x00638000, 0x006740BC, 0xEB0864A3, 0xEB088B18, 0xEAF77958}
-    };
-
-    static const u8    buffer[] =
-    {
-        0x0E, 0x40, 0x2D, 0xE9, 0x74, 0x10, 0x9F, 0xE5,
-        0x00, 0x20, 0x91, 0xE5, 0x00, 0x30, 0xA0, 0xE3,
-        0x00, 0x30, 0x81, 0xE5, 0x13, 0x3C, 0xA0, 0xE3,
-        0x93, 0x30, 0x83, 0xE2, 0x03, 0x00, 0x52, 0xE1,
-        0x00, 0x40, 0xA0, 0x03, 0x00, 0x40, 0xA0, 0x11,
-        0x0E, 0x80, 0xBD, 0xE8, 0x0E, 0x00, 0x50, 0xE3,
-        0x00, 0x00, 0x00, 0x00, 0x0F, 0x40, 0x2D, 0xE9,
-        0x10, 0xD0, 0x4D, 0xE2, 0x00, 0x00, 0xA0, 0xE3,
-        0x00, 0x00, 0x8D, 0xE5, 0x04, 0x00, 0x8D, 0xE5,
-        0x08, 0x00, 0x8D, 0xE5, 0x0C, 0x00, 0x8D, 0xE5,
-        0x00, 0x30, 0xA0, 0xE1, 0x00, 0x20, 0xA0, 0xE1,
-        0x13, 0x1C, 0xA0, 0xE3, 0x93, 0x10, 0x81, 0xE2,
-        0x18, 0x00, 0x9F, 0xE5, 0x00, 0x10, 0x80, 0xE5,
-        0x14, 0x00, 0x9F, 0xE5, 0x00, 0x00, 0x90, 0xE5,
-        0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0xA0, 0xE3,
-        0x10, 0xD0, 0x8D, 0xE2, 0x0F, 0x80, 0xBD, 0xE8
-    };
-
-    if (state) {
-
-        memcpy((void *)(offset[gameVer][0]), buffer, 0x80);
-        WRITEU32(offset[gameVer][0] + 0x30, data[gameVer][0]);
-        WRITEU32(offset[gameVer][0] + 0x70, data[gameVer][1]);
-        WRITEU32(offset[gameVer][0] + 0x80, data[gameVer][2]);
-        WRITEU32(offset[gameVer][0] + 0x84, data[gameVer][3]);
-        WRITEU32(offset[gameVer][1], data[gameVer][4]);
-        WRITEU32(offset[gameVer][2], data[gameVer][5]);
-
-    } else {
-        WRITEU32(offset[gameVer][0] + 0x30, data[gameVer][6]);
-    }
+void    pcAnywhere(void) {
+	
+	static const u32 offset = 0x005B9EE0;
+	
+		WRITEU32(offset, 0xE92D400E);
+		WRITEU32(offset + 0x04, 0xE59F1074);
+		WRITEU32(offset + 0x08, 0xE5912000);
+		WRITEU32(offset + 0x0C, 0xE3A03000);
+		WRITEU32(offset + 0x10, 0xE5813000);
+		WRITEU32(offset + 0x14, 0xE3A03C13);
+		WRITEU32(offset + 0x18, 0xE2833093);
+		WRITEU32(offset + 0x1C, 0xE1520003);
+		WRITEU32(offset + 0x20, 0x03A04000);
+		WRITEU32(offset + 0x24, 0x11A04000);
+		WRITEU32(offset + 0x28, 0xE8BD800E);
+		WRITEU32(offset + 0x2C, 0xE350000E);
+		WRITEU32(offset + 0x30, 0xEAF711CB);
+		WRITEU32(offset + 0x34, 0xE92D400F);
+		WRITEU32(offset + 0x38, 0xE24DD010);
+		WRITEU32(offset + 0x3C, 0xE3A00000);
+		WRITEU32(offset + 0x40, 0xE58D0000);
+		WRITEU32(offset + 0x44, 0xE58D0004);
+		WRITEU32(offset + 0x48, 0xE58D0008);
+		WRITEU32(offset + 0x4C, 0xE58D000C);
+		WRITEU32(offset + 0x50, 0xE1A03000);
+		WRITEU32(offset + 0x54, 0xE1A02000);
+		WRITEU32(offset + 0x58, 0xE3A01C13);
+		WRITEU32(offset + 0x5C, 0xE2811093);
+		WRITEU32(offset + 0x60, 0xE59F0018);
+		WRITEU32(offset + 0x64, 0xE5801000);
+		WRITEU32(offset + 0x68, 0xE59F0014);
+		WRITEU32(offset + 0x6C, 0xE5900000);
+		WRITEU32(offset + 0x70, 0xEBF7803B);
+		WRITEU32(offset + 0x74, 0xE3A00002);
+		WRITEU32(offset + 0x78, 0xE28DD010);
+		WRITEU32(offset + 0x7C, 0xE8BD800F);
+		WRITEU32(offset + 0x80, 0x00667000);
+		WRITEU32(offset + 0x84, 0x006A3984);
+		WRITEU32(0x0037CB10, 0xEB08F4FD);
+		WRITEU32(0x00389F88, 0xEB08BFD4);
+		
+		if (is_pressed(BUTTON_ST))
+			WRITEU32(0x005B9F10, 0x1AF711CB);
+	
 }
 
 
@@ -212,4 +206,16 @@ void    toggleNFC(u32 state) {
     };
 
     WRITEU32(offset[gameVer], (state) ? 0xE3A01000 : 0xE3A01001);
+}
+
+
+void noTrainer(void) {
+	
+	if (!checkAddress(0x08031E98)) {
+		return;
+	} else {
+		
+	u32 train = READU32(0x08031E98);
+		WRITEU32(0x08031E98, 0xE3A00001);
+	}
 }
