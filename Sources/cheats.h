@@ -30,7 +30,7 @@ enum {
     ALLBERRIES,
     ALLBEANS,
     ALLCLOTHES,
-    ALLCLOTHESM,
+	ALLCLOTHESM,
     SETGENDER,
     SETSKINTONE,
     SWITCHLOOKS,
@@ -72,7 +72,10 @@ enum {
     INFZMOVES,
     ONEHITKO,
     INVINCIBLEPARTY,
-    INFINITEPP
+	INFINITEPP,
+	POKETRIAL,
+	RANDOMPK,
+	NOTRAINER
 } e_identifiers;
 
 // Array of forms
@@ -165,7 +168,9 @@ void    zMoves(u32 state);
 void    infZMoves(void);
 void    oneHitKO(void);
 void    invincibleParty(void);
-void    infinitePP(void);
+void 	infinitePP(void);
+void 	pokeTrial(void);
+void 	randomPk(void);
 
 
 // Movement Modifiers
@@ -205,7 +210,7 @@ void	allBerries(void);
 void    allBeans(void);
 u32		clothesFunction(u32 offset, u8 data, u16 loop_num);
 void	allClothes(void);
-void    allClothesM(void);
+void 	allClothesM(void);
 
 
 // QR Codes
@@ -219,10 +224,11 @@ void    miscMenu(void);
 void    viewIVEV(void);
 void    cameraZoom(void);
 void	instantText(void);
-void    pcAnywhere(u32 state);
+void    pcAnywhere(void);
 void	rematchTrainers(void);
 void	toggleOutlines(u32 state);
 void    toggleNFC(u32 state);
+void 	noTrainer(void);
 
 
 // Illegal Cheats
